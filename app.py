@@ -173,7 +173,6 @@ def logout():
 
     return redirect(url_for("login"))
 
-# ---------------- RUN ----------------
 # ---------------- SALES ----------------
 @app.route("/sell/<int:id>")
 def sell(id):
@@ -212,5 +211,6 @@ def sell(id):
     conn.close()
 
     return redirect(url_for("dashboard"))
+# ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run()
