@@ -26,6 +26,15 @@ def init_db():
     )
     """)
 
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS sales (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    quantity INTEGER,
+    total REAL
+    )
+    """)
+
     # Crear admin por defecto
     c.execute("SELECT * FROM users WHERE username='admin'")
     admin = c.fetchone()
@@ -109,7 +118,10 @@ def dashboard():
         {p[1]} |
         Precio: S/{p[2]} |
         Stock: {p[3]}
-        <br>
+
+        <a href='/sell/{p[0]}'>Vender</a>
+
+        <br><br>
         """
 
     return html
@@ -162,5 +174,43 @@ def logout():
     return redirect(url_for("login"))
 
 # ---------------- RUN ----------------
+# ---------------- SALES ----------------
+@app.route("/sell/<int:id>")
+def sell(id):
+
+    conn = sqlite3.connect("pos.db")
+    c = conn.cursor()
+
+    # Buscar producto
+    c.execute("SELECT * FROM products WHERE id=?", (id,))
+    product = c.fetchone()
+
+    if product:
+
+        stock_actual = product[3]
+
+        if stock_actual > 0:
+
+            nuevo_stock = stock_actual - 1
+            total = product[2]
+
+            # Actualizar stock
+            c.execute("""
+            UPDATE products
+            SET stock=?
+            WHERE id=?
+            """, (nuevo_stock, id))
+
+            # Registrar venta
+            c.execute("""
+            INSERT INTO sales (product_id, quantity, total)
+            VALUES (?, ?, ?)
+            """, (id, 1, total))
+
+            conn.commit()
+
+    conn.close()
+
+    return redirect(url_for("dashboard"))
 if __name__ == "__main__":
     app.run()
