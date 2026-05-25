@@ -1,16 +1,20 @@
 from flask import Flask, request, redirect, url_for, session
 import psycopg2
+import os
 
 app = Flask(__name__)
 app.secret_key = "clave_secreta_pos"
 
-# 🔥 TU CONNECTION STRING DE SUPABASE
-DB_URL = "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.com:5432/postgres"
+# 🔥 RECOMENDADO: usar variable de entorno en Render
+DB_URL = os.environ.get(
+    "DB_URL",
+    "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.com:5432/postgres"
+)
 
 def get_db():
     return psycopg2.connect(DB_URL)
 
-# ---------------- INIT DB ----------------
+# ---------------- INIT DB (NO SE EJECUTA EN RENDER) ----------------
 def init_db():
     conn = get_db()
     c = conn.cursor()
@@ -42,7 +46,6 @@ def init_db():
     )
     """)
 
-    # admin por defecto
     c.execute("SELECT * FROM users WHERE username=%s", ("admin",))
     admin = c.fetchone()
 
@@ -55,7 +58,8 @@ def init_db():
     conn.commit()
     conn.close()
 
-init_db()
+# ❌ IMPORTANTE: NO LLAMAR ESTO EN RENDER
+# init_db()
 
 # ---------------- LOGIN ----------------
 @app.route("/", methods=["GET", "POST"])
@@ -84,16 +88,11 @@ def login():
 
     return """
     <h2>Login POS</h2>
-
     <form method="POST">
         <input name="username" placeholder="Usuario"><br><br>
         <input name="password" type="password" placeholder="Contraseña"><br><br>
         <button>Entrar</button>
     </form>
-
-    <br>
-    Usuario: admin<br>
-    Contraseña: 1234
     """
 
 # ---------------- DASHBOARD ----------------
@@ -129,7 +128,7 @@ def dashboard():
 
     return html
 
-# ---------------- ADD PRODUCT ----------------
+# ---------------- ADD ----------------
 @app.route("/add", methods=["GET", "POST"])
 def add():
 
@@ -172,7 +171,6 @@ def sell(id):
     product = c.fetchone()
 
     if product:
-
         stock_actual = product[3]
 
         if stock_actual > 0:
@@ -193,7 +191,6 @@ def sell(id):
             conn.commit()
 
     conn.close()
-
     return redirect(url_for("dashboard"))
 
 # ---------------- VENTAS ----------------
@@ -227,7 +224,6 @@ def ventas():
         total_general += float(v[3])
 
     html += f"<br><h2>Total en caja: S/{total_general}</h2>"
-
     return html
 
 # ---------------- LOGOUT ----------------
