@@ -8,7 +8,7 @@ app.secret_key = "clave_secreta_pos"
 # 🔥 RECOMENDADO: usar variable de entorno en Render
 DB_URL = os.environ.get(
     "DB_URL",
-    "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.com:5432/postgres"
+    "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.co:5432/postgres"
 )
 
 def get_db():
