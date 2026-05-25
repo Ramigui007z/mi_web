@@ -117,13 +117,22 @@ def dashboard():
     html += "<h3>Productos</h3>"
 
     for p in products:
+
+        color = "black"
+
+        if p[3] <= 5:
+            color = "red"
+
         html += f"""
-        ID: {p[0]} |
-        {p[1]} |
-        Precio: S/{p[2]} |
-        Stock: {p[3]}
-        <a href='/sell/{p[0]}'>Vender</a>
-        <br><br>
+        <div style="color:{color}">
+            ID: {p[0]} |
+            {p[1]} |
+            Precio: S/{p[2]} |
+            Stock: {p[3]}
+
+            <a href='/sell/{p[0]}'>Vender</a>
+            <br><br>
+        </div>
         """
 
     return html
@@ -203,9 +212,14 @@ def ventas():
     conn = get_db()
     c = conn.cursor()
 
-    c.execute("SELECT * FROM sales")
-    ventas = c.fetchall()
+    c.execute("""
+        SELECT s.id, p.name, s.quantity, s.total, s.created_at
+        FROM sales s
+        JOIN products p ON s.product_id = p.id
+        ORDER BY s.id DESC
+    """)
 
+    ventas = c.fetchall()
     conn.close()
 
     html = "<h2>💰 Caja de Ventas</h2>"
@@ -216,16 +230,17 @@ def ventas():
     for v in ventas:
         html += f"""
         Venta ID: {v[0]} |
-        Producto ID: {v[1]} |
+        Producto: {v[1]} |
         Cantidad: {v[2]} |
-        Total: S/{v[3]}
+        Total: S/{v[3]} |
+        Fecha: {v[4]}
         <br>
         """
         total_general += float(v[3])
 
     html += f"<br><h2>Total en caja: S/{total_general}</h2>"
-    return html
 
+    return html
 # ---------------- LOGOUT ----------------
 @app.route("/logout")
 def logout():
