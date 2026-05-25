@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hola, mi primera web con Python"
+    return "Sistema POS funcionando 🚀"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
