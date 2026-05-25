@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "clave_secreta_pos"
 
 # 🔥 TU CONNECTION STRING DE SUPABASE
-DB_URL = "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.co:5432/postgres"
+DB_URL = "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.com:5432/postgres"
 
 def get_db():
     return psycopg2.connect(DB_URL)
