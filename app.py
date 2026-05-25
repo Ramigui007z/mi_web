@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "clave_secreta_pos"
 
-# 🔥 RECOMENDADO: usar variable de entorno en Render
+# ---------------- DB ----------------
 DB_URL = os.environ.get(
     "DB_URL",
     "postgresql://postgres:bg4BarSND11nN3hU@db.muzoufplncpyumoaqmet.supabase.co:5432/postgres"
@@ -13,53 +13,6 @@ DB_URL = os.environ.get(
 
 def get_db():
     return psycopg2.connect(DB_URL)
-
-# ---------------- INIT DB (NO SE EJECUTA EN RENDER) ----------------
-def init_db():
-    conn = get_db()
-    c = conn.cursor()
-
-    c.execute("""
-    CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username TEXT,
-        password TEXT
-    )
-    """)
-
-    c.execute("""
-    CREATE TABLE IF NOT EXISTS products (
-        id SERIAL PRIMARY KEY,
-        name TEXT,
-        price NUMERIC,
-        stock INTEGER
-    )
-    """)
-
-    c.execute("""
-    CREATE TABLE IF NOT EXISTS sales (
-        id SERIAL PRIMARY KEY,
-        product_id INTEGER,
-        quantity INTEGER,
-        total NUMERIC,
-        date TIMESTAMP DEFAULT NOW()
-    )
-    """)
-
-    c.execute("SELECT * FROM users WHERE username=%s", ("admin",))
-    admin = c.fetchone()
-
-    if not admin:
-        c.execute(
-            "INSERT INTO users (username, password) VALUES (%s, %s)",
-            ("admin", "1234")
-        )
-
-    conn.commit()
-    conn.close()
-
-# ❌ IMPORTANTE: NO LLAMAR ESTO EN RENDER
-# init_db()
 
 # ---------------- LOGIN ----------------
 @app.route("/", methods=["GET", "POST"])
@@ -88,6 +41,9 @@ def login():
 
     return """
     <h2>Login POS</h2>
+
+    <img src="/static/logo.gif" width="200"><br><br>
+
     <form method="POST">
         <input name="username" placeholder="Usuario"><br><br>
         <input name="password" type="password" placeholder="Contraseña"><br><br>
@@ -105,35 +61,50 @@ def dashboard():
     conn = get_db()
     c = conn.cursor()
 
-    c.execute("SELECT * FROM products")
+    c.execute("SELECT * FROM products ORDER BY id DESC")
     products = c.fetchall()
 
     conn.close()
 
-    html = f"<h2>Bienvenido {session['user']}</h2>"
-    html += "<a href='/add'>Agregar producto</a><br><br>"
-    html += "<a href='/ventas'>Ver ventas</a><br><br>"
-    html += "<a href='/logout'>Cerrar sesión</a><br><br>"
-    html += "<h3>Productos</h3>"
+    html = f"""
+    <h2>📊 POS - Bienvenido {session['user']}</h2>
+
+    <a href='/add'>➕ Agregar producto</a> |
+    <a href='/ventas'>💰 Ventas</a> |
+    <a href='/logout'>🚪 Salir</a>
+
+    <hr>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+    """
 
     for p in products:
 
         color = "black"
-
         if p[3] <= 5:
             color = "red"
 
         html += f"""
-        <div style="color:{color}">
-            ID: {p[0]} |
-            {p[1]} |
-            Precio: S/{p[2]} |
-            Stock: {p[3]}
-
-            <a href='/sell/{p[0]}'>Vender</a>
-            <br><br>
-        </div>
+        <tr style="color:{color}">
+            <td>{p[0]}</td>
+            <td>{p[1]}</td>
+            <td>S/{p[2]}</td>
+            <td>{p[3]}</td>
+            <td>
+                <a href='/sell/{p[0]}'>Vender</a> |
+                <a href='/edit/{p[0]}'>Editar</a>
+            </td>
+        </tr>
         """
+
+    html += "</table>"
 
     return html
 
@@ -180,6 +151,7 @@ def sell(id):
     product = c.fetchone()
 
     if product:
+
         stock_actual = product[3]
 
         if stock_actual > 0:
@@ -202,6 +174,44 @@ def sell(id):
     conn.close()
     return redirect(url_for("dashboard"))
 
+# ---------------- EDIT ----------------
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+
+    conn = get_db()
+    c = conn.cursor()
+
+    if request.method == "POST":
+
+        name = request.form["name"]
+        price = request.form["price"]
+        stock = request.form["stock"]
+
+        c.execute("""
+            UPDATE products
+            SET name=%s, price=%s, stock=%s
+            WHERE id=%s
+        """, (name, price, stock, id))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for("dashboard"))
+
+    c.execute("SELECT * FROM products WHERE id=%s", (id,))
+    p = c.fetchone()
+    conn.close()
+
+    return f"""
+    <h2>Editar producto</h2>
+    <form method="POST">
+        <input name="name" value="{p[1]}"><br><br>
+        <input name="price" value="{p[2]}"><br><br>
+        <input name="stock" value="{p[3]}"><br><br>
+        <button>Guardar</button>
+    </form>
+    """
+
 # ---------------- VENTAS ----------------
 @app.route("/ventas")
 def ventas():
@@ -213,7 +223,7 @@ def ventas():
     c = conn.cursor()
 
     c.execute("""
-        SELECT s.id, p.name, s.quantity, s.total, s.created_at
+        SELECT s.id, p.name, s.quantity, s.total, s.date
         FROM sales s
         JOIN products p ON s.product_id = p.id
         ORDER BY s.id DESC
@@ -222,7 +232,7 @@ def ventas():
     ventas = c.fetchall()
     conn.close()
 
-    html = "<h2>💰 Caja de Ventas</h2>"
+    html = "<h2>💰 Ventas</h2>"
     html += "<a href='/dashboard'>Volver</a><br><br>"
 
     total_general = 0
@@ -238,9 +248,10 @@ def ventas():
         """
         total_general += float(v[3])
 
-    html += f"<br><h2>Total en caja: S/{total_general}</h2>"
+    html += f"<br><h2>Total: S/{total_general}</h2>"
 
     return html
+
 # ---------------- LOGOUT ----------------
 @app.route("/logout")
 def logout():
