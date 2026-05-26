@@ -59,7 +59,6 @@ CSS = """
   body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
   ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
-  /* SIDEBAR */
   .sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: 260px; background: var(--surface); border-right: 1px solid var(--border); transform: translateX(-260px); transition: transform 0.3s cubic-bezier(.4,0,.2,1); z-index: 200; display: flex; flex-direction: column; padding: 1.25rem 0.75rem; box-shadow: 4px 0 40px rgba(0,0,0,0.5); overflow-y: auto; }
   .sidebar.open { transform: translateX(0); }
   .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: 199; display: none; }
@@ -75,7 +74,6 @@ CSS = """
   .sidebar a.danger:hover { background: var(--red-dim); color: var(--red-text); }
   .sidebar-footer { margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border); }
 
-  /* NAV */
   .nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
   .nav-left { display: flex; align-items: center; gap: 0.875rem; }
   .hamburger { background: none; border: none; color: var(--muted2); cursor: pointer; padding: 6px; border-radius: var(--radius-sm); font-size: 1.1rem; transition: all 0.15s; display: flex; align-items: center; }
@@ -93,13 +91,11 @@ CSS = """
   .role-admin { background: rgba(79,110,247,0.15); color: #93b4ff; }
   .role-vendedor { background: rgba(16,185,129,0.15); color: var(--green-text); }
 
-  /* LAYOUT */
   .container { max-width: 1320px; margin: 0 auto; padding: 1.5rem 2rem; }
   .page-header { margin-bottom: 1.5rem; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .page-header-left h1 { font-size: 1.3rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
   .page-header-left p { color: var(--muted); font-size: 0.8rem; margin-top: 3px; }
 
-  /* STATS */
   .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.875rem; margin-bottom: 1.5rem; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; transition: all 0.2s; cursor: default; position: relative; overflow: hidden; }
   .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 2px 2px 0 0; }
@@ -118,7 +114,6 @@ CSS = """
   .stat-card.red .stat-value { color: var(--red-text); }
   .stat-card.purple .stat-value { color: var(--purple-text); }
 
-  /* TABLE */
   .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   .table-header { padding: 0.875rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .table-header h2 { font-size: 0.9rem; font-weight: 700; color: #fff; }
@@ -127,7 +122,6 @@ CSS = """
   td { padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.83rem; vertical-align: middle; }
   tr:hover td { background: var(--surface2); }
 
-  /* BADGES */
   .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
   .badge-green { background: var(--green-dim); color: var(--green-text); }
   .badge-amber { background: var(--amber-dim); color: var(--amber-text); }
@@ -138,7 +132,6 @@ CSS = """
   .product-name { font-weight: 600; color: var(--text); }
   .price { font-weight: 700; color: #60a5fa; font-variant-numeric: tabular-nums; }
 
-  /* ACTION BUTTONS */
   .action-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-size: 0.76rem; font-weight: 600; text-decoration: none; transition: all 0.15s; margin: 0 1px; border: 1px solid transparent; white-space: nowrap; cursor: pointer; background: none; }
   .btn-sell { background: rgba(16,185,129,0.1); color: var(--green-text); border-color: rgba(16,185,129,0.2); }
   .btn-sell:hover { background: var(--green); color: #fff; border-color: var(--green); }
@@ -151,13 +144,11 @@ CSS = """
   .btn-stock { background: var(--purple-dim); color: var(--purple-text); border-color: rgba(124,58,237,0.2); }
   .btn-stock:hover { background: var(--purple); color: #fff; }
 
-  /* TOOLBAR */
   .toolbar { padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
   .search-input { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 7px 13px; border-radius: var(--radius-sm); font-size: 0.83rem; width: 260px; outline: none; transition: border 0.2s; }
   .search-input:focus { border-color: var(--blue); }
   .search-input::placeholder { color: var(--muted); }
 
-  /* BUTTONS */
   .btn-primary { background: var(--blue); color: #fff; border: none; padding: 7px 16px; border-radius: var(--radius-sm); font-size: 0.83rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
   .btn-primary:hover { background: var(--blue2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(79,110,247,0.3); }
   .btn-secondary { background: transparent; color: var(--muted2); border: 1px solid var(--border); padding: 7px 16px; border-radius: var(--radius-sm); font-size: 0.83rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
@@ -165,7 +156,6 @@ CSS = """
   .btn-danger { background: var(--red-dim); color: var(--red-text); border: 1px solid rgba(239,68,68,0.2); padding: 7px 16px; border-radius: var(--radius-sm); font-size: 0.83rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
   .btn-danger:hover { background: var(--red); color: #fff; }
 
-  /* FORMS */
   .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; max-width: 500px; }
   .form-group { margin-bottom: 1.1rem; }
   label { display: block; font-size: 0.7rem; font-weight: 700; color: var(--muted2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
@@ -175,7 +165,6 @@ CSS = """
   input::placeholder { color: var(--muted) !important; }
   select option { background: var(--surface2); color: var(--text); }
 
-  /* LOGIN */
   .login-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); background-image: radial-gradient(ellipse at 20% 50%, rgba(79,110,247,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.05) 0%, transparent 50%); }
   .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; width: 400px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); }
   .login-logo { text-align: center; margin-bottom: 2rem; }
@@ -183,27 +172,22 @@ CSS = """
   .login-logo p { color: var(--muted); font-size: 0.83rem; margin-top: 4px; }
   .login-logo img { max-width: 130px; border-radius: 14px; margin-bottom: 1rem; }
 
-  /* ALERTS */
   .alert { padding: 0.7rem 1.1rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.83rem; font-weight: 500; }
   .alert-error { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.3); color: var(--red-text); }
   .alert-success { background: var(--green-dim); border: 1px solid rgba(16,185,129,0.3); color: var(--green-text); }
 
-  /* TOTAL BAR */
   .total-bar { background: #0a0d16; padding: 0.875rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
   .total-bar span { font-size: 0.78rem; color: var(--muted); }
   .total-bar strong { font-size: 1.05rem; color: var(--green-text); font-weight: 800; }
 
-  /* EMPTY */
   .empty-state { text-align: center; padding: 3rem; color: var(--muted); }
   .empty-state .empty-icon { font-size: 2.2rem; margin-bottom: 0.75rem; opacity: 0.4; }
 
-  /* TOOLTIP */
   .has-tooltip { position: relative; cursor: default; }
   .tooltip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1e2640; border: 1px solid var(--border2); color: var(--text); padding: 8px 12px; border-radius: 8px; font-size: 0.73rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 50; box-shadow: 0 8px 24px rgba(0,0,0,0.4); line-height: 1.7; }
   .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--border2); }
   .has-tooltip:hover .tooltip { opacity: 1; }
 
-  /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.75rem; width: 430px; max-width: 95vw; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
@@ -217,7 +201,6 @@ CSS = """
   .receipt .r-footer { text-align: center; color: #777; font-size: 0.67rem; margin-top: 0.875rem; }
   .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.1rem; }
 
-  /* GRID 2 COL */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media(max-width:768px) { .grid-2 { grid-template-columns: 1fr; } .nav-links { display: none; } }
 
@@ -404,37 +387,49 @@ def dashboard():
 
     rows = ""
     for p in products:
+        pid = p["id"]
+        pname = p["name"]
         stock = p["stock"]
         precio = float(p["price"])
         valor_inv = precio * stock
         if stock <= 0:
             badge = '<span class="badge badge-red">Sin stock</span>'
-            tip = "❌ Sin unidades disponibles"
+            tip = "Sin unidades disponibles"
         elif stock <= 5:
-            badge = f'<span class="badge badge-amber">{stock} uds</span>'
-            tip = f"⚠️ Stock bajo: solo {stock} unidades"
+            badge = '<span class="badge badge-amber">' + str(stock) + ' uds</span>'
+            tip = "Stock bajo: solo " + str(stock) + " unidades"
         else:
-            badge = f'<span class="badge badge-green">{stock} uds</span>'
-            tip = f"✅ {stock} unidades disponibles"
+            badge = '<span class="badge badge-green">' + str(stock) + ' uds</span>'
+            tip = str(stock) + " unidades disponibles"
 
-        pid = p['id']; pname = p['name']
-        acciones = f'<a href="/sell/{pid}" class="action-btn btn-sell" onclick="return doSell({pid}, \'{pname}\', {precio})">▶ Vender</a>'
+        acciones = (
+            '<a href="/sell/' + str(pid) + '" class="action-btn btn-sell" '
+            'onclick="return doSell(' + str(pid) + ', \'' + pname + '\', ' + str(precio) + ')">▶ Vender</a>'
+        )
         if rol == "admin":
-            acciones += f'<a href="/edit/{pid}" class="action-btn btn-edit">✏ Editar</a>'
-            acciones += f'<a href="/stock/add/{pid}" class="action-btn btn-stock">📥 Stock</a>'
-            acciones += f'<a href="/delete/{pid}" class="action-btn btn-delete" onclick="return confirm(\'¿Eliminar {pname}?\')">✕</a>'
+            acciones += '<a href="/edit/' + str(pid) + '" class="action-btn btn-edit">✏ Editar</a>'
+            acciones += '<a href="/stock/add/' + str(pid) + '" class="action-btn btn-stock">📥 Stock</a>'
+            acciones += ('<a href="/delete/' + str(pid) + '" class="action-btn btn-delete" '
+                         'onclick="return confirm(\'¿Eliminar ' + pname + '?\')">✕</a>')
 
-        rows += f"""<tr>
-          <td style="color:var(--muted);font-size:0.76rem;">#{p['id']}</td>
-          <td><div class="has-tooltip"><span class="product-name">{p['name']}</span><div class="tooltip">🏷️ {p['name']}<br>💰 Precio: S/ {precio:.2f}<br>🗃️ Valor en stock: S/ {valor_inv:.2f}</div></div></td>
-          <td><div class="has-tooltip"><span class="price">S/ {precio:.2f}</span><div class="tooltip">💵 Precio unitario de venta<br>📦 Stock total: S/ {valor_inv:.2f}</div></div></td>
-          <td><div class="has-tooltip">{badge}<div class="tooltip">{tip}</div></div></td>
-          <td>{acciones}</td></tr>"""
+        rows += (
+            "<tr>"
+            "<td style='color:var(--muted);font-size:0.76rem;'>#" + str(pid) + "</td>"
+            "<td><div class='has-tooltip'><span class='product-name'>" + pname + "</span>"
+            "<div class='tooltip'>🏷️ " + pname + "<br>💰 Precio: S/ " + f"{precio:.2f}" +
+            "<br>🗃️ Valor en stock: S/ " + f"{valor_inv:.2f}" + "</div></div></td>"
+            "<td><div class='has-tooltip'><span class='price'>S/ " + f"{precio:.2f}" + "</span>"
+            "<div class='tooltip'>💵 Precio unitario<br>📦 Stock total: S/ " + f"{valor_inv:.2f}" + "</div></div></td>"
+            "<td><div class='has-tooltip'>" + badge + "<div class='tooltip'>" + tip + "</div></div></td>"
+            "<td>" + acciones + "</td></tr>"
+        )
 
     if not rows:
         rows = '<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">📦</div><p>No hay productos. <a href="/add" style="color:var(--blue);">Agrega el primero</a></p></div></td></tr>'
 
     add_btn = '<a href="/add" class="btn-primary">+ Agregar producto</a>' if rol == "admin" else ""
+    stock_color = "red" if stock_bajo > 0 else "green"
+    stock_tip = "Requieren reposición" if stock_bajo > 0 else "Stock en buen nivel"
 
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>POS - Inventario</title>
     <script>
@@ -453,9 +448,9 @@ def dashboard():
       </div>
       <div class="stats-grid">
         <div class="stat-card blue has-tooltip"><div class="stat-label">Productos</div><div class="stat-value">{total_productos}</div><div class="stat-sub">En inventario</div><div class="tooltip">Total de SKUs registrados</div></div>
-        <div class="stat-card green has-tooltip"><div class="stat-label">Ventas hoy</div><div class="stat-value">S/ {float(ventas_hoy):.2f}</div><div class="stat-sub">{num_ventas_hoy} transacciones</div><div class="tooltip">💰 Ingresos del día de hoy<br>🔢 {num_ventas_hoy} ventas realizadas</div></div>
-        <div class="stat-card {'red' if stock_bajo>0 else 'green'} has-tooltip"><div class="stat-label">Stock bajo</div><div class="stat-value">{stock_bajo}</div><div class="stat-sub">Productos ≤ 5 unidades</div><div class="tooltip">{'⚠️ Requieren reposición' if stock_bajo>0 else '✅ Stock en buen nivel'}</div></div>
-        <div class="stat-card amber has-tooltip"><div class="stat-label">Total histórico</div><div class="stat-value">S/ {float(total_all):.2f}</div><div class="stat-sub">Todas las ventas</div><div class="tooltip">💰 Suma total acumulada de ventas</div></div>
+        <div class="stat-card green has-tooltip"><div class="stat-label">Ventas hoy</div><div class="stat-value">S/ {float(ventas_hoy):.2f}</div><div class="stat-sub">{num_ventas_hoy} transacciones</div><div class="tooltip">💰 Ingresos del día</div></div>
+        <div class="stat-card {stock_color} has-tooltip"><div class="stat-label">Stock bajo</div><div class="stat-value">{stock_bajo}</div><div class="stat-sub">Productos ≤ 5 unidades</div><div class="tooltip">{stock_tip}</div></div>
+        <div class="stat-card amber has-tooltip"><div class="stat-label">Total histórico</div><div class="stat-value">S/ {float(total_all):.2f}</div><div class="stat-sub">Todas las ventas</div><div class="tooltip">💰 Suma total acumulada</div></div>
       </div>
       <div class="table-card">
         <div class="table-header"><h2>Productos</h2>
@@ -467,7 +462,7 @@ def dashboard():
     </div></body></html>"""
 
 # ================================================================
-# ADD PRODUCT (solo admin)
+# ADD PRODUCT
 # ================================================================
 @app.route("/add", methods=["GET", "POST"])
 @admin_required
@@ -482,7 +477,6 @@ def add():
             c = conn.cursor()
             c.execute("INSERT INTO products (name, price, stock) VALUES (%s,%s,%s)", (name, float(price), int(stock)))
             conn.commit()
-            # registrar en historial de stock
             c.execute("INSERT INTO stock_history (product_id, cantidad, tipo, nota, usuario) VALUES ((SELECT id FROM products WHERE name=%s ORDER BY id DESC LIMIT 1), %s, 'entrada', 'Stock inicial', %s)",
                       (name, int(stock), session['user']))
             conn.commit()
@@ -527,11 +521,12 @@ def sell(id):
             c.execute("INSERT INTO sales (product_id, quantity, total) VALUES (%s,%s,%s)", (id, 1, product["price"]))
             conn.commit()
         conn.close()
-    except: pass
+    except:
+        pass
     return redirect(url_for("dashboard"))
 
 # ================================================================
-# EDIT (solo admin)
+# EDIT
 # ================================================================
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 @admin_required
@@ -553,7 +548,11 @@ def edit(id):
     c.execute("SELECT * FROM products WHERE id=%s", (id,))
     p = c.fetchone()
     conn.close()
-    if not p: return redirect(url_for("dashboard"))
+    if not p:
+        return redirect(url_for("dashboard"))
+    pname = p["name"]
+    pprice = float(p["price"])
+    pstock = p["stock"]
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Editar</title></head><body>
     {nav(session['user'], session.get('rol','vendedor'))}
     <div class="container">
@@ -561,10 +560,10 @@ def edit(id):
       {'<div class="alert alert-error">⚠️ ' + error + '</div>' if error else ''}
       <div class="form-card">
         <form method="POST" autocomplete="off">
-          <div class="form-group"><label>Nombre</label><input name="name" type="text" autocomplete="off" value="{p['name']}" required></div>
+          <div class="form-group"><label>Nombre</label><input name="name" type="text" autocomplete="off" value="{pname}" required></div>
           <div class="grid-2">
-            <div class="form-group"><label>Precio (S/)</label><input name="price" type="number" step="0.01" min="0" value="{float(p['price']):.2f}" required></div>
-            <div class="form-group"><label>Stock</label><input name="stock" type="number" min="0" value="{p['stock']}" required></div>
+            <div class="form-group"><label>Precio (S/)</label><input name="price" type="number" step="0.01" min="0" value="{pprice:.2f}" required></div>
+            <div class="form-group"><label>Stock</label><input name="stock" type="number" min="0" value="{pstock}" required></div>
           </div>
           <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
             <button class="btn-primary" type="submit">💾 Guardar cambios</button>
@@ -575,7 +574,7 @@ def edit(id):
     </div></body></html>"""
 
 # ================================================================
-# DELETE (solo admin)
+# DELETE
 # ================================================================
 @app.route("/delete/<int:id>")
 @admin_required
@@ -586,11 +585,12 @@ def delete(id):
         c.execute("DELETE FROM products WHERE id=%s", (id,))
         conn.commit()
         conn.close()
-    except: pass
+    except:
+        pass
     return redirect(url_for("dashboard"))
 
 # ================================================================
-# STOCK - AGREGAR (solo admin)
+# STOCK
 # ================================================================
 @app.route("/stock")
 @admin_required
@@ -602,19 +602,25 @@ def stock():
     conn.close()
     rows = ""
     for p in products:
+        pid = p["id"]
+        pname = p["name"]
         stock_v = p["stock"]
+        precio = float(p["price"])
         if stock_v <= 0:
             badge = '<span class="badge badge-red">Sin stock</span>'
         elif stock_v <= 5:
-            badge = f'<span class="badge badge-amber">{stock_v} uds</span>'
+            badge = '<span class="badge badge-amber">' + str(stock_v) + ' uds</span>'
         else:
-            badge = f'<span class="badge badge-green">{stock_v} uds</span>'
-        rows += f"""<tr>
-          <td><span class="product-name">{p['name']}</span></td>
-          <td><span class="price">S/ {float(p['price']):.2f}</span></td>
-          <td>{badge}</td>
-          <td><a href="/stock/add/{p['id']}" class="action-btn btn-stock">📥 Agregar stock</a>
-              <a href="/edit/{p['id']}" class="action-btn btn-edit">✏ Editar</a></td></tr>"""
+            badge = '<span class="badge badge-green">' + str(stock_v) + ' uds</span>'
+        rows += (
+            "<tr><td><span class='product-name'>" + pname + "</span></td>"
+            "<td><span class='price'>S/ " + f"{precio:.2f}" + "</span></td>"
+            "<td>" + badge + "</td>"
+            "<td>"
+            "<a href='/stock/add/" + str(pid) + "' class='action-btn btn-stock'>📥 Agregar stock</a>"
+            "<a href='/edit/" + str(pid) + "' class='action-btn btn-edit'>✏ Editar</a>"
+            "</td></tr>"
+        )
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Gestión de Stock</title></head><body>
     {nav(session['user'], 'admin')}
     <div class="container">
@@ -654,17 +660,20 @@ def stock_add(id):
             c.execute("INSERT INTO stock_history (product_id, cantidad, tipo, nota, usuario) VALUES (%s,%s,%s,%s,%s)",
                       (id, cantidad, tipo, nota, session["user"]))
             conn.commit()
-            msg = f"✅ Stock actualizado correctamente. Nuevo stock: {nuevo} uds."
+            msg = "✅ Stock actualizado correctamente. Nuevo stock: " + str(nuevo) + " uds."
         except Exception as e:
             error = f"Error: {str(e)}"
     c.execute("SELECT * FROM products WHERE id=%s", (id,))
     p = c.fetchone()
     conn.close()
-    if not p: return redirect(url_for("stock"))
+    if not p:
+        return redirect(url_for("stock"))
+    pname = p["name"]
+    pstock = p["stock"]
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Agregar Stock</title></head><body>
     {nav(session['user'], 'admin')}
     <div class="container">
-      <div class="page-header"><div class="page-header-left"><h1>📥 Actualizar Stock</h1><p>Producto: <strong>{p['name']}</strong> — Stock actual: {p['stock']} uds.</p></div></div>
+      <div class="page-header"><div class="page-header-left"><h1>📥 Actualizar Stock</h1><p>Producto: <strong>{pname}</strong> — Stock actual: {pstock} uds.</p></div></div>
       {'<div class="alert alert-error">⚠️ ' + error + '</div>' if error else ''}
       {'<div class="alert alert-success">' + msg + '</div>' if msg else ''}
       <div class="form-card">
@@ -676,7 +685,7 @@ def stock_add(id):
             </select>
           </div>
           <div class="form-group"><label>Cantidad</label><input name="cantidad" type="number" min="1" placeholder="0" required></div>
-          <div class="form-group"><label>Nota / Motivo (opcional)</label><input name="nota" type="text" autocomplete="off" placeholder="Ej: Compra a proveedor, ajuste de inventario..."></div>
+          <div class="form-group"><label>Nota / Motivo (opcional)</label><input name="nota" type="text" autocomplete="off" placeholder="Ej: Compra a proveedor..."></div>
           <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
             <button class="btn-primary" type="submit">💾 Actualizar stock</button>
             <a href="/stock" class="btn-secondary">Cancelar</a>
@@ -686,7 +695,7 @@ def stock_add(id):
     </div></body></html>"""
 
 # ================================================================
-# HISTORIAL DE STOCK (solo admin)
+# HISTORIAL DE STOCK
 # ================================================================
 @app.route("/stock/historial")
 @admin_required
@@ -703,15 +712,26 @@ def stock_historial():
     rows = ""
     for h in historial:
         fecha = h["created_at"].strftime("%d/%m/%Y %H:%M") if h["created_at"] else "-"
-        tipo_badge = '<span class="badge badge-green">📥 Entrada</span>' if h["tipo"] == "entrada" else '<span class="badge badge-red">📤 Salida</span>'
-        rows += f"""<tr>
-          <td style="color:var(--muted);font-size:0.76rem;">#{h['id']}</td>
-          <td><span class="product-name">{h['name']}</span></td>
-          <td>{tipo_badge}</td>
-          <td><strong style="color:{'var(--green-text)' if h['tipo']=='entrada' else 'var(--red-text)'}">{'+'if h['tipo']=='entrada' else '-'}{h['cantidad']} uds</strong></td>
-          <td style="color:var(--muted2);font-size:0.8rem;">{h['nota'] or '—'}</td>
-          <td><span class="badge badge-blue">{h['usuario']}</span></td>
-          <td style="color:var(--muted);font-size:0.76rem;">{fecha}</td></tr>"""
+        if h["tipo"] == "entrada":
+            tipo_badge = '<span class="badge badge-green">📥 Entrada</span>'
+            cant_str = "+" + str(h["cantidad"]) + " uds"
+            cant_color = "var(--green-text)"
+        else:
+            tipo_badge = '<span class="badge badge-red">📤 Salida</span>'
+            cant_str = "-" + str(h["cantidad"]) + " uds"
+            cant_color = "var(--red-text)"
+        nota = h["nota"] or "—"
+        rows += (
+            "<tr>"
+            "<td style='color:var(--muted);font-size:0.76rem;'>#" + str(h["id"]) + "</td>"
+            "<td><span class='product-name'>" + h["name"] + "</span></td>"
+            "<td>" + tipo_badge + "</td>"
+            "<td><strong style='color:" + cant_color + "'>" + cant_str + "</strong></td>"
+            "<td style='color:var(--muted2);font-size:0.8rem;'>" + nota + "</td>"
+            "<td><span class='badge badge-blue'>" + h["usuario"] + "</span></td>"
+            "<td style='color:var(--muted);font-size:0.76rem;'>" + fecha + "</td>"
+            "</tr>"
+        )
     if not rows:
         rows = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📋</div><p>No hay movimientos registrados</p></div></td></tr>'
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Historial de Stock</title></head><body>
@@ -741,7 +761,12 @@ def facturacion():
     products = c.fetchall()
     conn.close()
 
-    product_options = "".join([f'<option value="{p["id"]}" data-price="{float(p["price"])}" data-stock="{p["stock"]}">{p["name"]} — S/ {float(p["price"]):.2f} ({p["stock"]} uds)</option>' for p in products])
+    product_options = "".join([
+        '<option value="' + str(p["id"]) + '" data-price="' + str(float(p["price"])) +
+        '" data-stock="' + str(p["stock"]) + '">' + p["name"] +
+        ' — S/ ' + f'{float(p["price"]):.2f}' + ' (' + str(p["stock"]) + ' uds)</option>'
+        for p in products
+    ])
 
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Facturación</title>
     <style>
@@ -877,39 +902,52 @@ def ventas():
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     filtro = request.args.get("filtro", "hoy")
     if filtro == "hoy":
-        where = "WHERE DATE(s.created_at)=CURRENT_DATE"; label_filtro = "Hoy"
+        where = "WHERE DATE(s.created_at)=CURRENT_DATE"
+        label_filtro = "Hoy"
     elif filtro == "semana":
-        where = "WHERE s.created_at>=CURRENT_DATE-INTERVAL '7 days'"; label_filtro = "Últimos 7 días"
+        where = "WHERE s.created_at>=CURRENT_DATE-INTERVAL '7 days'"
+        label_filtro = "Últimos 7 días"
     elif filtro == "mes":
-        where = "WHERE DATE_TRUNC('month',s.created_at)=DATE_TRUNC('month',CURRENT_DATE)"; label_filtro = "Este mes"
+        where = "WHERE DATE_TRUNC('month',s.created_at)=DATE_TRUNC('month',CURRENT_DATE)"
+        label_filtro = "Este mes"
     else:
-        where = ""; label_filtro = "Todo el historial"
-    c.execute(f"SELECT s.id, p.name, s.quantity, s.total, s.created_at, p.price FROM sales s JOIN products p ON s.product_id=p.id {where} ORDER BY s.id DESC")
+        where = ""
+        label_filtro = "Todo el historial"
+    c.execute("SELECT s.id, p.name, s.quantity, s.total, s.created_at, p.price FROM sales s JOIN products p ON s.product_id=p.id " + where + " ORDER BY s.id DESC")
     ventas_list = c.fetchall()
-    c.execute(f"SELECT COALESCE(SUM(s.total),0) FROM sales s {where}")
+    c.execute("SELECT COALESCE(SUM(s.total),0) FROM sales s " + where)
     total_general = float(c.fetchone()[0])
-    c.execute(f"SELECT COUNT(*) FROM sales s {where}")
+    c.execute("SELECT COUNT(*) FROM sales s " + where)
     num_ventas = c.fetchone()[0]
     conn.close()
     rows = ""
     for v in ventas_list:
         fecha = v["created_at"].strftime("%d/%m/%Y %H:%M") if v["created_at"] else "-"
         fecha_full = v["created_at"].strftime("%A %d de %B, %Y — %H:%M") if v["created_at"] else "-"
-        precio_unit = float(v["price"]); total_v = float(v["total"])
-        rows += f"""<tr>
-          <td style="color:var(--muted);font-size:0.76rem;">#{v['id']}</td>
-          <td><span class="product-name">{v['name']}</span></td>
-          <td><div class="has-tooltip"><span class="badge badge-green">{v['quantity']} uds</span><div class="tooltip">Precio unit.: S/ {precio_unit:.2f}</div></div></td>
-          <td><span class="price">S/ {total_v:.2f}</span></td>
-          <td><div class="has-tooltip"><span style="color:var(--muted);font-size:0.76rem;">{fecha}</span><div class="tooltip">🗓️ {fecha_full}</div></div></td>
-          <td><button class="action-btn btn-receipt" onclick="showReceipt({{name:'{v['name']}',qty:{v['quantity']},price:{precio_unit},total:{total_v}}})">🧾 Boleta</button></td></tr>"""
+        precio_unit = float(v["price"])
+        total_v = float(v["total"])
+        vname = v["name"]
+        vqty = v["quantity"]
+        vid = v["id"]
+        rows += (
+            "<tr>"
+            "<td style='color:var(--muted);font-size:0.76rem;'>#" + str(vid) + "</td>"
+            "<td><span class='product-name'>" + vname + "</span></td>"
+            "<td><div class='has-tooltip'><span class='badge badge-green'>" + str(vqty) + " uds</span>"
+            "<div class='tooltip'>Precio unit.: S/ " + f"{precio_unit:.2f}" + "</div></div></td>"
+            "<td><span class='price'>S/ " + f"{total_v:.2f}" + "</span></td>"
+            "<td><div class='has-tooltip'><span style='color:var(--muted);font-size:0.76rem;'>" + fecha + "</span>"
+            "<div class='tooltip'>🗓️ " + fecha_full + "</div></div></td>"
+            "<td><button class='action-btn btn-receipt' onclick='showReceipt({name:\"" + vname + "\",qty:" + str(vqty) + ",price:" + str(precio_unit) + ",total:" + str(total_v) + "})'>🧾 Boleta</button></td>"
+            "</tr>"
+        )
     if not rows:
         rows = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📊</div><p>No hay ventas en este período</p></div></td></tr>'
     filtro_links = ""
     for f, label in [("hoy","Hoy"),("semana","7 días"),("mes","Mes"),("todo","Todo")]:
-        active = "background:var(--border2);color:#fff;" if filtro==f else ""
-        filtro_links += f'<a href="/ventas?filtro={f}" style="padding:5px 12px;border-radius:7px;text-decoration:none;font-size:0.76rem;font-weight:600;color:var(--muted2);{active}">{label}</a>'
-    prom = total_general/num_ventas if num_ventas > 0 else 0
+        active = "background:var(--border2);color:#fff;" if filtro == f else ""
+        filtro_links += '<a href="/ventas?filtro=' + f + '" style="padding:5px 12px;border-radius:7px;text-decoration:none;font-size:0.76rem;font-weight:600;color:var(--muted2);' + active + '">' + label + '</a>'
+    prom = total_general / num_ventas if num_ventas > 0 else 0
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Ventas</title></head><body>
     {nav(session['user'], rol)}
     {modal_receipt()}
@@ -931,7 +969,7 @@ def ventas():
     </div></body></html>"""
 
 # ================================================================
-# USUARIOS (solo admin)
+# USUARIOS
 # ================================================================
 @app.route("/usuarios")
 @admin_required
@@ -943,15 +981,29 @@ def usuarios():
     conn.close()
     rows = ""
     for u in users:
-        rol_badge = f'<span class="badge badge-blue">{u["rol"]}</span>' if u["rol"]=="admin" else f'<span class="badge badge-green">{u["rol"]}</span>'
-        rows += f"""<tr>
-          <td style="color:var(--muted);">#{u['id']}</td>
-          <td><div style="display:flex;align-items:center;gap:8px;"><div class="avatar" style="width:26px;height:26px;font-size:0.65rem;">{u['username'][0].upper()}</div><span class="product-name">{u['username']}</span></div></td>
-          <td>{rol_badge}</td>
-          <td>
-            <a href="/usuarios/edit/{u['id']}" class="action-btn btn-edit">✏ Editar</a>
-            {"" if u['username']=='admin' else f'<a href="/usuarios/delete/{u[\'id\']}" class="action-btn btn-delete" onclick="return confirm(\'¿Eliminar usuario?\')">✕ Eliminar</a>'}
-          </td></tr>"""
+        uid = u["id"]
+        uname = u["username"]
+        urol = u["rol"]
+        if urol == "admin":
+            rol_badge = '<span class="badge badge-blue">' + urol + '</span>'
+        else:
+            rol_badge = '<span class="badge badge-green">' + urol + '</span>'
+        if uname == "admin":
+            delete_btn = ""
+        else:
+            delete_btn = ('<a href="/usuarios/delete/' + str(uid) + '" class="action-btn btn-delete" '
+                          'onclick="return confirm(\'¿Eliminar usuario?\')">✕ Eliminar</a>')
+        rows += (
+            "<tr>"
+            "<td style='color:var(--muted);'>#" + str(uid) + "</td>"
+            "<td><div style='display:flex;align-items:center;gap:8px;'>"
+            "<div class='avatar' style='width:26px;height:26px;font-size:0.65rem;'>" + uname[0].upper() + "</div>"
+            "<span class='product-name'>" + uname + "</span></div></td>"
+            "<td>" + rol_badge + "</td>"
+            "<td><a href='/usuarios/edit/" + str(uid) + "' class='action-btn btn-edit'>✏ Editar</a>"
+            + delete_btn + "</td>"
+            "</tr>"
+        )
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Usuarios</title></head><body>
     {nav(session['user'], 'admin')}
     <div class="container">
@@ -1025,13 +1077,15 @@ def usuarios_edit(id):
     c.execute("SELECT * FROM users WHERE id=%s", (id,))
     u = c.fetchone()
     conn.close()
-    if not u: return redirect(url_for("usuarios"))
-    sel_v = 'selected' if u["rol"]=="vendedor" else ""
-    sel_a = 'selected' if u["rol"]=="admin" else ""
+    if not u:
+        return redirect(url_for("usuarios"))
+    uname = u["username"]
+    sel_v = "selected" if u["rol"] == "vendedor" else ""
+    sel_a = "selected" if u["rol"] == "admin" else ""
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>Editar Usuario</title></head><body>
     {nav(session['user'], 'admin')}
     <div class="container">
-      <div class="page-header"><div class="page-header-left"><h1>✏️ Editar usuario: {u['username']}</h1></div></div>
+      <div class="page-header"><div class="page-header-left"><h1>✏️ Editar usuario: {uname}</h1></div></div>
       {'<div class="alert alert-error">⚠️ ' + error + '</div>' if error else ''}
       <div class="form-card">
         <form method="POST" autocomplete="off">
@@ -1059,7 +1113,8 @@ def usuarios_delete(id):
         c.execute("DELETE FROM users WHERE id=%s", (id,))
         conn.commit()
         conn.close()
-    except: pass
+    except:
+        pass
     return redirect(url_for("usuarios"))
 
 # ================================================================
