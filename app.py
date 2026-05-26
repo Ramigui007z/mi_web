@@ -259,10 +259,10 @@ def dashboard():
     c.execute("SELECT COUNT(*) FROM products WHERE stock <= 5")
     stock_bajo = c.fetchone()[0]
 
-    c.execute("SELECT COALESCE(SUM(total), 0) FROM sales WHERE DATE(date) = CURRENT_DATE")
+    c.execute("SELECT COALESCE(SUM(total), 0) FROM sales WHERE DATE(created_at) = CURRENT_DATE")
     ventas_hoy = c.fetchone()[0]
 
-    c.execute("SELECT COUNT(*) FROM sales WHERE DATE(date) = CURRENT_DATE")
+    c.execute("SELECT COUNT(*) FROM sales WHERE DATE(created_at) = CURRENT_DATE")
     num_ventas_hoy = c.fetchone()[0]
 
     conn.close()
@@ -526,20 +526,20 @@ def ventas():
     filtro = request.args.get("filtro", "hoy")
 
     if filtro == "hoy":
-        where = "WHERE DATE(s.date) = CURRENT_DATE"
+        where = "WHERE DATE(s.created_at) = CURRENT_DATE"
         label_filtro = "Hoy"
     elif filtro == "semana":
-        where = "WHERE s.date >= CURRENT_DATE - INTERVAL '7 days'"
+        where = "WHERE s.created_at >= CURRENT_DATE - INTERVAL '7 days'"
         label_filtro = "Últimos 7 días"
     elif filtro == "mes":
-        where = "WHERE DATE_TRUNC('month', s.date) = DATE_TRUNC('month', CURRENT_DATE)"
+        where = "WHERE DATE_TRUNC('month', s.created_at) = DATE_TRUNC('month', CURRENT_DATE)"
         label_filtro = "Este mes"
     else:
         where = ""
         label_filtro = "Todo el historial"
 
     c.execute(f"""
-        SELECT s.id, p.name, s.quantity, s.total, s.date
+        SELECT s.id, p.name, s.quantity, s.total, s.created_at
         FROM sales s
         JOIN products p ON s.product_id = p.id
         {where}
@@ -557,7 +557,7 @@ def ventas():
 
     rows = ""
     for v in ventas_list:
-        fecha = v["date"].strftime("%d/%m/%Y %H:%M") if v["date"] else "-"
+        fecha = v["created_at"].strftime("%d/%m/%Y %H:%M") if v["created_at"] else "-"
         rows += f"""
         <tr>
           <td style="color:#475569; font-size:0.8rem;">#{v['id']}</td>
