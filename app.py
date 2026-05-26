@@ -417,11 +417,12 @@ def dashboard():
             badge = f'<span class="badge badge-green">{stock} uds</span>'
             tip = f"✅ {stock} unidades disponibles"
 
-        acciones = f'<a href="/sell/{p["id"]}" class="action-btn btn-sell" onclick="return doSell({p[\'id\']}, \'{p[\'name\']}\', {precio})">▶ Vender</a>'
+        pid = p['id']; pname = p['name']
+        acciones = f'<a href="/sell/{pid}" class="action-btn btn-sell" onclick="return doSell({pid}, \'{pname}\', {precio})">▶ Vender</a>'
         if rol == "admin":
-            acciones += f'<a href="/edit/{p["id"]}" class="action-btn btn-edit">✏ Editar</a>'
-            acciones += f'<a href="/stock/add/{p["id"]}" class="action-btn btn-stock">📥 Stock</a>'
-            acciones += f'<a href="/delete/{p["id"]}" class="action-btn btn-delete" onclick="return confirm(\'¿Eliminar {p[\'name\']}?\')">✕</a>'
+            acciones += f'<a href="/edit/{pid}" class="action-btn btn-edit">✏ Editar</a>'
+            acciones += f'<a href="/stock/add/{pid}" class="action-btn btn-stock">📥 Stock</a>'
+            acciones += f'<a href="/delete/{pid}" class="action-btn btn-delete" onclick="return confirm(\'¿Eliminar {pname}?\')">✕</a>'
 
         rows += f"""<tr>
           <td style="color:var(--muted);font-size:0.76rem;">#{p['id']}</td>
