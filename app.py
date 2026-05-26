@@ -150,7 +150,8 @@ CSS = """
   .login-logo { text-align: center; margin-bottom: 2rem; }
   .login-logo h1 { font-size: 1.5rem; font-weight: 800; color: #fff; }
   .login-logo p { color: #64748b; font-size: 0.875rem; margin-top: 4px; }
-  .login-logo img { width: 80px; border-radius: 12px; margin-bottom: 1rem; }
+  .login-logo img { width: 120px; border-radius: 12px; margin-bottom: 1rem; }
+  input[type=text] { background: #12141e !important; color: #e2e8f0 !important; border: 1px solid #2d3148 !important; }
 
   /* VENTAS */
   .venta-row { display: flex; align-items: center; justify-content: space-between; padding: 0.875rem 1.5rem; border-top: 1px solid #2d3148; font-size: 0.875rem; }
@@ -215,7 +216,7 @@ def login():
         except Exception as e:
             error = f"Error de conexión: {str(e)}"
 
-    logo_tag = '<img src="/static/logo.gif">' if os.path.exists("static/logo.gif") else ""
+    logo_tag = '<img src="/static/logo.gif" onerror="this.style.display=\'none\'">'
 
     return f"""<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">{CSS}<title>POS - Login</title></head><body>
     <div class="login-wrapper">
@@ -229,7 +230,7 @@ def login():
         <form method="POST">
           <div class="form-group">
             <label>Usuario</label>
-            <input name="username" placeholder="Ingresa tu usuario" required autofocus>
+            <input name="username" type="text" autocomplete="off" placeholder="Ingresa tu usuario" required autofocus>
           </div>
           <div class="form-group">
             <label>Contraseña</label>
